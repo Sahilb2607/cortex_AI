@@ -187,9 +187,16 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build Frontend
+        env:
+          VITE_SERVER_URI: ${{ secrets.VITE_SERVER_URI }}
+          VITE_FIREBASE_API_KEY: ${{ secrets.VITE_FIREBASE_API_KEY }}
+          VITE_RAZORPAY_KEY_ID: ${{ secrets.VITE_RAZORPAY_KEY_ID }}
         run: |
+          test -n "$VITE_SERVER_URI" || (echo "VITE_SERVER_URI is missing" && exit 1)
+          test -n "$VITE_FIREBASE_API_KEY" || (echo "VITE_FIREBASE_API_KEY is missing" && exit 1)
+          test -n "$VITE_RAZORPAY_KEY_ID" || (echo "VITE_RAZORPAY_KEY_ID is missing" && exit 1)
           cd frontend
-          npm install
+          npm ci
           npm run build
 
       - name: AWS Configure
