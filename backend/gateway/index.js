@@ -26,7 +26,7 @@ app.use("/api/chat", authenticate, HeaderwithProxy(process.env.CHAT_URI));
 app.use("/api/agent",authenticate,HeaderwithProxy(process.env.AGENT_URI));
 app.use("/api/billing", authenticate, HeaderwithProxy(process.env.BILLING_URI));
 app.get("/", (req, res) => {
-    res.json({ message: "Gateway is running on server yup"})
+    res.json({ message: "Gateway is running on server hey"})
 })
 
 app.listen(PORT, () => {
